@@ -25,7 +25,9 @@ export default function Signup() {
         },
         body: JSON.stringify(formData),
       });
+      
       const data = await res.json();
+     
       if (data.success === false) {
         setError(data.message);
         setLoading(false);
@@ -39,7 +41,7 @@ export default function Signup() {
       setError(error.message);
     }
 
-    console.log(data);
+   
   };
 
   return (
@@ -66,7 +68,7 @@ export default function Signup() {
           onChange={handleChange}
         />
         <input
-          type="password "
+          type='password'
           placeholder="password"
           className="border p-3 rounded-lg "
           id="password"
