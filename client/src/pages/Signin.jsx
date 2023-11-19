@@ -1,11 +1,18 @@
 import { useState } from "react";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  signInStart,
+  signInSuccess,
+  signInFailure,
+} from "../redux/user/userSlice";
 
 export default function Signin() {
   const [formData, setFormData] = useState({});
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const navigate=useNavigate();
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { loading, error } = useSelector((state) => state.user);
 
   const handleChange = (e) => {
     setFormData({
@@ -17,32 +24,27 @@ export default function Signin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      setLoading(true);
-      const res = await fetch('/api/auth/signin', {
+      dispatch(signInStart());
+      const res = await fetch("/api/auth/signin", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
-      
+
       const data = await res.json();
-   
-      
+
       if (data.success === false) {
-        setError(data.message);
-        setLoading(false);
+        dispatch(signInFailure(data.message));
         return;
       }
-      setLoading(false);
-      setError(null);
-      navigate('/');
-    } catch (error) {
-      setLoading(false);
-      setError(error.message);
-    }
 
-    
+      dispatch(signInSuccess(data));
+      navigate("/");
+    } catch (error) {
+      dispatch(signInFailure(error.message));
+    }
   };
 
   return (
@@ -62,7 +64,7 @@ export default function Signin() {
           onChange={handleChange}
         />
         <input
-          type='password'
+          type="password"
           placeholder="password"
           className="border p-3 rounded-lg "
           id="password"
@@ -83,9 +85,8 @@ export default function Signin() {
           <span className="text-blue-600">Sign up</span>
         </Link>
       </div>
-      
+
       {error && <p className="text-red-500 mt-5">{error}</p>}
     </div>
   );
 }
-
