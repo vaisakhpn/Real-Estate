@@ -14,7 +14,6 @@ import {
   deleteUserFailure,
   deleteUserStart,
   deleteUserSuccess,
-  signOutUserFailure,
   signOutUserStart,
 } from "../redux/user/userSlice";
 import { Link } from "react-router-dom";
