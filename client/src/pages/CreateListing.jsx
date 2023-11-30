@@ -9,8 +9,6 @@ import { app } from "../firebase";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-
-
 export default function CreateListing() {
   const [files, setFiles] = useState([]);
   const navigate = useNavigate();
@@ -34,7 +32,6 @@ export default function CreateListing() {
   const [uploadingImage, setUploadingImage] = useState(false);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
-
 
   const handleImageSubmit = () => {
     if (files.length > 0 && files.length + formData.imageUrls.length < 7) {
@@ -173,7 +170,7 @@ export default function CreateListing() {
             className="border p-3 rounded-lg "
             id="name"
             maxLength="62"
-            minLength="10"
+            minLength="5"
             required
             onChange={handleChange}
             value={formData.name}
@@ -360,7 +357,10 @@ export default function CreateListing() {
                 </button>
               </div>
             ))}
-          <button disabled={loading || uploadingImage} className="p-3  rounded-lg bg-slate-700 text-white uppercase hover:opacity-95 disabled:opacity-80">
+          <button
+            disabled={loading || uploadingImage}
+            className="p-3  rounded-lg bg-slate-700 text-white uppercase hover:opacity-95 disabled:opacity-80"
+          >
             {loading ? "Creating..." : "Create Listing"}
           </button>
           {error && <p className="text-red-500 text-sm mt-5">{error}</p>}
