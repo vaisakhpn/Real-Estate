@@ -134,9 +134,9 @@ export default function Profile() {
   const handleListingDelete = async (listingId) => {
     try {
       const res = await fetch(`/api/listing/delete/${listingId}`, {
-        method: 'DELETE',
+        method: "DELETE",
       });
-      console.log(res);
+
       const data = await res.json();
       if (data.success === false) {
         console.log(data.message);
@@ -148,7 +148,6 @@ export default function Profile() {
       setUserListing;
     } catch (error) {
       console.log(error);
-     
     }
   };
 

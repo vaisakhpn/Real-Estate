@@ -62,7 +62,7 @@ export default function Home() {
           className="text-blue-700 text-xs sm:text-sm font-bold underline hover:no-underline"
           to={"/search"}
         >
-          Let's Start now...
+          Lets Start now...
         </Link>
       </div>
       <div>
@@ -80,7 +80,7 @@ export default function Home() {
                   key={listing._id}
                 ></div>
               </SwiperSlide>
-            ))}
+                  ))}
         </Swiper>
       </div>
       <div className="max-w-6xl mx-auto p-3 flex flex-col gap-8 my-10 ">
