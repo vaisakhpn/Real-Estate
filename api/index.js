@@ -18,7 +18,7 @@ mongoose
     console.log(err);
   });
 
-const _dirname = path.resolve();
+const __dirname = path.resolve();
 
 const app = express();
 app.use(express.json());
